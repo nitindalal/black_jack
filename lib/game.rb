@@ -37,7 +37,7 @@ class Game
 					card = Card.new
 					card.denomination_cd = Card.denominations[denomination]
 					card.suit_cd = Card.suits[suit]
-					card.card_set_id = set
+					card.card_set = set
 					@cards << card
 				end
 			end
@@ -106,12 +106,15 @@ class Game
 	end
 
 	def deal player
+		puts "Dealt a card to " + player.name
+		puts ''
 		player.add_card get_random_card
-		puts 'remaining_cards - ' + remaining_cards.count.to_s
 	end
 
+	# TODO: move this method to player
 	def print_player_details
-		puts @player.name + " has score of #{@player.score.to_s} from cards- " + @player.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s + '-' + card.card_set_id.to_s}.join(',')
-		puts @dealer.name + " has score of #{@dealer.score.to_s} from cards- " + @dealer.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s + '-' + card.card_set_id.to_s}.join(',')
+		puts @player.name + " has score of #{@player.score.to_s} from cards- " + @player.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s + '-' + card.card_set.to_s}.join(',')
+		puts @dealer.name + " has score of #{@dealer.score.to_s} from cards- " + @dealer.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s + '-' + card.card_set.to_s}.join(',')
+		puts ''
 	end
 end
