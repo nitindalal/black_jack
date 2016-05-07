@@ -1,5 +1,7 @@
 class Game
-	attr_accessor :cards, :dealer, :player 
+	attr_accessor :cards, :dealer, :player
+
+	@infinity = (1.0/0.0) 
 
 	#TODO change this later to initialize players first. or better ask for player name when initialized it called
 	def initialize(card_sets=6)

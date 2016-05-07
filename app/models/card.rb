@@ -1,6 +1,6 @@
 require 'game'
 class Card < ActiveRecord::Base
-	attr_accessor :card_set_id, :denomination_cd, :suit_cd, :dealt
+	attr_accessor :card_set, :denomination_cd, :suit_cd, :dealt
 
 	belongs_to :user
 
