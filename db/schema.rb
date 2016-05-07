@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160507191622) do
 
-  create_table "card_sets", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "cards", force: :cascade do |t|
     t.integer  "suit_cd"
     t.integer  "denomination_cd"
