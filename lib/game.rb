@@ -5,30 +5,30 @@ class Game
 
 	#TODO change this later to initialize players first. or better ask for player name when initialized it called
 	def initialize(card_sets=6)
-
-		# TODO add gem to allow multiple attributes
-		@dealer = User.new
-		@dealer.role_cd = 1
-		@dealer.name = 'System'
-
-		@player = User.new
-		puts 'please enter player name'
-		player_name = gets.chomp().strip().humanize
-		@player.name = player_name
-
 		initialize_new_card_sets card_sets
+		initialize_players
+	end
 
+	def play
 		# TODO: find a better place to do it
 		deal_first_cards
 		print_player_details
-
 		winner = hit
 		print_player_details
 		puts winner.name + " has won the game with " + winner.score.to_s + ' points'
+	end
 
-		puts "do you want to play again? Y/N"
-		player_response = gets.chomp().strip().capitalize
+	def initialize_players
+		@dealer = create_new_player 'System', User.roles[:dealer]
+		@player = create_new_player
+	end
 
+	def create_new_player(player_name=nil, role_cd=User.roles[:player])
+		unless player_name
+			puts 'Please enter player name'
+			player_name = gets.chomp().strip().humanize
+		end
+		User.new({ :name => player_name, :role_cd => role_cd})
 	end
 	
 	def initialize_new_card_sets(number)
@@ -107,16 +107,14 @@ class Game
 		1.0/0.0
 	end
 
+	def print_player_details
+		@dealer.print_details
+		@player.print_details
+	end
+
 	def deal player
 		puts "Dealt a card to " + player.name
 		puts ''
 		player.add_card get_random_card
-	end
-
-	# TODO: move this method to player
-	def print_player_details
-		puts @player.name + " has score of #{@player.score.to_s} from cards- " + @player.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s + '-' + card.card_set.to_s}.join(',')
-		puts @dealer.name + " has score of #{@dealer.score.to_s} from cards- " + @dealer.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s + '-' + card.card_set.to_s}.join(',')
-		puts ''
 	end
 end
