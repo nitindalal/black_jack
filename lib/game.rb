@@ -25,7 +25,7 @@ class Game
 		puts winner.name + " has won the game with " + winner.score.to_s + ' points'
 
 		puts "do you want to play again? Y/N"
-		player_response = get.chomp().strip().capitalize
+		player_response = gets.chomp().strip().capitalize
 
 	end
 	
