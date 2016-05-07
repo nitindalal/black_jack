@@ -1,12 +1,11 @@
 class Game
 	attr_accessor :cards, :dealer, :player
 
-	@infinity = (1.0/0.0) 
-
 	#TODO change this later to initialize players first. or better ask for player name when initialized it called
 	def initialize(card_sets=6)
 		initialize_new_card_sets card_sets
 		initialize_players
+		@infinity = (1.0/0.0)
 	end
 
 	def play
@@ -57,7 +56,7 @@ class Game
 		case @player.score
 		when  21
 			return @player
-		when 21..infinity
+		when 21..@infinity
 			return @dealer
 		when 1..20
 			print_player_details
@@ -76,17 +75,16 @@ class Game
 	end
 
 	def stand
-
 		deal @dealer
 		case @dealer.score
 		when  21
 			return @dealer
-		when 21..infinity
+		when 21..@infinity
 			return @player
 		when 1..16
 			print_player_details
 			stand
-		when 17..infinity
+		when 17..@infinity
 			# TODO ask what happens when they are equal
 			return (@player.score >= @dealer.score ? @player : @dealer)
 		end
@@ -101,10 +99,6 @@ class Game
 		card = remaining_cards.sample
 		card.dealt = true
 		card
-	end
-
-	def infinity
-		1.0/0.0
 	end
 
 	def print_player_details
