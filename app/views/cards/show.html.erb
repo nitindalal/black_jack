@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Suit cd:</strong>
+  <%= @card.suit_cd %>
+</p>
+
+<p>
+  <strong>Denomination cd:</strong>
+  <%= @card.denomination_cd %>
+</p>
+
+<p>
+  <strong>Card set:</strong>
+  <%= @card.card_set_id %>
+</p>
+
+<%= link_to 'Edit', edit_card_path(@card) %> |
+<%= link_to 'Back', cards_path %>

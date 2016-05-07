@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  suit_cd: 1
+  denomination_cd: 1
+  card_set_id: 1
+
+two:
+  suit_cd: 1
+  denomination_cd: 1
+  card_set_id: 1
