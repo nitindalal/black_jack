@@ -6,11 +6,6 @@ class User < ActiveRecord::Base
 
 	as_enum :role, dealer: 1, player: 2
 
-	# TODO - create a can_deal module for this method
-	def deal player, number
-
-	end
-
 	def add_card card
 		self.cards << card
 	end

@@ -1,0 +1,29 @@
+module UtilityMethods
+
+	def create_new_player(player_name=nil, role_cd=User.roles[:player])
+		unless player_name
+			puts 'Please enter player name'
+			player_name = gets.chomp().strip().humanize
+		end
+		User.new({ :name => player_name, :role_cd => role_cd})
+	end
+
+	def fetch_player_response
+		player_response = ''
+		while !(player_response == 'H' or player_response == 'S')
+			if player_response == ''
+				puts "What do you want to do? Hit or Stand?. H/S"
+			else
+				puts 'Not a valid reponse. Please only enter H or S'
+			end
+			player_response = gets.chomp().strip.capitalize
+		end
+		player_response
+	end
+
+	def print_player_details game
+		game.dealer.print_details
+		game.player.print_details
+	end
+
+end

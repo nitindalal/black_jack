@@ -1,4 +1,5 @@
 class Game
+	include UtilityMethods
 
 	include ActiveModel::Model         
   include ActiveModel::Associations 
@@ -7,7 +8,6 @@ class Game
 
 	has_many :card_decks
 
-	# TODO: rename users to players
 	def initialize(card_decks=6)
 		initialize_new_card_decks card_decks
 		initialize_players
@@ -16,23 +16,15 @@ class Game
 
 	def play
 		deal_first_cards
-		print_player_details
+		print_player_details self
 		winner = hit
-		print_player_details
+		print_player_details self
 		puts winner.name + " has won the game with " + winner.score.to_s + ' points'
 	end
 
 	def initialize_players
 		@dealer = create_new_player 'System', User.roles[:dealer]
 		@player = create_new_player
-	end
-
-	def create_new_player(player_name=nil, role_cd=User.roles[:player])
-		unless player_name
-			puts 'Please enter player name'
-			player_name = gets.chomp().strip().humanize
-		end
-		User.new({ :name => player_name, :role_cd => role_cd})
 	end
 	
 	def initialize_new_card_decks(decks)
@@ -48,7 +40,6 @@ class Game
 	end
 
 	def hit
-
 		deal @player
 		case @player.score
 		when  21
@@ -56,7 +47,7 @@ class Game
 		when 21..@infinity
 			return @dealer
 		when 1..20
-			print_player_details
+			print_player_details self
 			player_response = fetch_player_response
 
 			if player_response == 'H'
@@ -67,19 +58,6 @@ class Game
 		end
 	end
 
-	def fetch_player_response
-		player_response = ''
-		while !(player_response == 'H' or player_response == 'S')
-			if player_response == ''
-				puts "What do you want to do? Hit or Stand?. H/S"
-			else
-				puts 'Not a valid reponse. Please only enter H or S'
-			end
-			player_response = gets.chomp().strip.capitalize
-		end
-		player_response
-	end
-
 	def stand
 		deal @dealer
 		case @dealer.score
@@ -88,7 +66,7 @@ class Game
 		when 21..@infinity
 			return @player
 		when 1..16
-			print_player_details
+			print_player_details self
 			stand
 		when 17..@infinity
 			# TODO ask what happens when they are equal. For now player wins in case of equal
@@ -104,11 +82,6 @@ class Game
 		card = remaining_cards.sample
 		card.dealt = true
 		card
-	end
-
-	def print_player_details
-		@dealer.print_details
-		@player.print_details
 	end
 
 	def deal player
