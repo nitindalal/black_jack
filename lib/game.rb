@@ -12,6 +12,7 @@ class Game
 		initialize_new_card_decks card_decks
 		initialize_players
 		@infinity = (1.0/0.0)
+		@logger = Logger.new(STDOUT)
 	end
 
 	# call this method to start the game after initializing
@@ -24,7 +25,7 @@ class Game
 
 		# print player score when the game ends
 		print_player_details self
-		puts winner.name + " has won the game with " + winner.score.to_s + ' points'
+		@logger.info winner.name + " has won the game with " + winner.score.to_s + ' points'
 	end
 
 	# initialize system and player
@@ -104,8 +105,8 @@ class Game
 
 	def deal player
 		player.add_card get_random_card
-		puts "Dealt a card to " + player.name
-		puts 'remaining cards are ' + remaining_cards.count.to_s
-		puts ''
+		@logger.info "Dealt a card to " + player.name
+		@logger.debug 'remaining cards are ' + remaining_cards.count.to_s
+		@logger.info ''
 	end
 end

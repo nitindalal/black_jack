@@ -1,4 +1,3 @@
-require 'game'
 class Card < ActiveRecord::Base
 	attr_accessor :card_set, :denomination_cd, :suit_cd, :dealt
 

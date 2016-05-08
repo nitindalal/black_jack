@@ -1,4 +1,3 @@
-require 'game'
 class User < ActiveRecord::Base
 	attr_accessor :role_cd
 
@@ -15,7 +14,8 @@ class User < ActiveRecord::Base
 	end
 
 	def print_details
-		puts self.name + " has score of #{self.score.to_s} from cards- " + self.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s}.join(',')
-		puts ''
+		@logger ||= Logger.new(STDOUT)
+		@logger.info self.name + " has score of #{self.score.to_s} from cards- " + self.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s}.join(',')
+		@logger.info ''
 	end
 end

@@ -8,6 +8,7 @@ class CardDeck
 
 	def initialize deck_number
 		@deck_number = deck_number
+		@logger = Logger.new(STDOUT)
 		@cards ||= []
 		Card.suits.keys.each do |suit|
 			Card.denominations.keys.each do |denomination|
