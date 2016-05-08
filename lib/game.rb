@@ -57,18 +57,27 @@ class Game
 			return @dealer
 		when 1..20
 			print_player_details
+			player_response = fetch_player_response
 
-			puts "What do you want to do? Hit or Stand?. H/S"
-			player_response = gets.chomp().strip.capitalize
 			if player_response == 'H'
 				hit
 			elsif player_response == 'S'
 				stand
-			else
-				# TODO handle this exception somehow!!
-				puts "please enter H or S only"
 			end
 		end
+	end
+
+	def fetch_player_response
+		player_response = ''
+		while !(player_response == 'H' or player_response == 'S')
+			if player_response == ''
+				puts "What do you want to do? Hit or Stand?. H/S"
+			else
+				puts 'Not a valid reponse. Please only enter H or S'
+			end
+			player_response = gets.chomp().strip.capitalize
+		end
+		player_response
 	end
 
 	def stand
@@ -82,7 +91,7 @@ class Game
 			print_player_details
 			stand
 		when 17..@infinity
-			# TODO ask what happens when they are equal
+			# TODO ask what happens when they are equal. For now player wins in case of equal
 			return (@player.score >= @dealer.score ? @player : @dealer)
 		end
 	end
@@ -104,7 +113,6 @@ class Game
 
 	def deal player
 		puts "Dealt a card to " + player.name
-		puts 'cards remaining now - ' + remaining_cards.count.to_s
 		puts ''
 		player.add_card get_random_card
 	end
