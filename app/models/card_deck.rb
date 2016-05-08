@@ -15,4 +15,8 @@ class CardDeck
 			end
 		end
 	end
+
+	def remaining_deck_cards
+		@cards.select{|card| !card.dealt}
+	end
 end
