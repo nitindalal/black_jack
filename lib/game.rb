@@ -13,6 +13,7 @@ class Game
 		initialize_players
 		@infinity = (1.0/0.0)
 		@logger = Logger.new(STDOUT)
+		@logger.level = 1
 	end
 
 	# call this method to start the game after initializing
