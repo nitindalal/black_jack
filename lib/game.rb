@@ -8,9 +8,9 @@ class Game
 	has_many :card_decks
 
 	# TODO: rename users to players
-	#TODO change this later to initialize players first. or better ask for player name when initialized it called
-	def initialize(card_sets=6)
-		initialize_new_card_sets card_sets
+	# TODO change this later to initialize players first. or better ask for player name when initialized it called
+	def initialize(card_decks=6)
+		initialize_new_card_decks card_decks
 		initialize_players
 		@infinity = (1.0/0.0)
 	end
@@ -37,10 +37,10 @@ class Game
 		User.new({ :name => player_name, :role_cd => role_cd})
 	end
 	
-	def initialize_new_card_sets(number)
+	def initialize_new_card_decks(decks)
 		@card_decks ||= []
-		for set in 1..number
-			@card_decks << CardDeck.new({:deck_number => set})
+		for deck in 1..decks
+			@card_decks << CardDeck.new({:deck_number => deck})
 		end
 	end
 
