@@ -100,7 +100,7 @@ class Game
 	end
 
 	def get_random_card
-		card = @card_decks.sample.get_random_card_from_deck
+		card = @card_decks.select{|deck| deck.remaining_deck_cards.count > 0 }.sample.get_random_card_from_deck
 	end
 
 	def deal player
