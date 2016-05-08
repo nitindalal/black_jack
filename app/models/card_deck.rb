@@ -19,4 +19,10 @@ class CardDeck
 	def remaining_deck_cards
 		@cards.select{|card| !card.dealt}
 	end
+
+	def get_random_card_from_deck
+		card = remaining_deck_cards.sample
+		card.mark_as_dealt
+		card
+	end
 end
