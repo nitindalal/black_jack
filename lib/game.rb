@@ -8,7 +8,6 @@ class Game
 	has_many :card_decks
 
 	# TODO: rename users to players
-	# TODO change this later to initialize players first. or better ask for player name when initialized it called
 	def initialize(card_decks=6)
 		initialize_new_card_decks card_decks
 		initialize_players
@@ -16,7 +15,6 @@ class Game
 	end
 
 	def play
-		# TODO: find a better place to do it
 		deal_first_cards
 		print_player_details
 		winner = hit
@@ -90,10 +88,9 @@ class Game
 	end
 
 	def remaining_cards
-		@card_decks.inject([]){|cards,deck| cards |= deck.cards.select{|card| !card.dealt}}
+		@card_decks.inject([]){|cards,deck| cards |= deck.remaining_deck_cards}
 	end
 
-	# TODO: somehow the deal method should be on the dealer, user
 	def get_random_card
 		card = remaining_cards.sample
 		card.dealt = true
