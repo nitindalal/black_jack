@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 	end
 
 	def print_details
-		puts self.name + " has score of #{self.score.to_s} from cards- " + self.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s + '-' + card.card_set.to_s}.join(',')
+		puts self.name + " has score of #{self.score.to_s} from cards- " + self.cards.map{|card| card.denomination_cd.to_s + '-' + card.suit.to_s}.join(',')
 		puts ''
 	end
 end

@@ -1,6 +1,13 @@
 class Game
-	attr_accessor :cards, :dealer, :player
 
+	include ActiveModel::Model         
+  include ActiveModel::Associations 
+
+	attr_accessor :dealer, :player
+
+	has_many :card_decks
+
+	# TODO: rename users to players
 	#TODO change this later to initialize players first. or better ask for player name when initialized it called
 	def initialize(card_sets=6)
 		initialize_new_card_sets card_sets
@@ -31,17 +38,9 @@ class Game
 	end
 	
 	def initialize_new_card_sets(number)
-		@cards ||= []
+		@card_decks ||= []
 		for set in 1..number
-			Card.suits.keys.each do |suit|
-				Card.denominations.keys.each do |denomination|
-					card = Card.new
-					card.denomination_cd = Card.denominations[denomination]
-					card.suit_cd = Card.suits[suit]
-					card.card_set = set
-					@cards << card
-				end
-			end
+			@card_decks << CardDeck.new({:deck_number => set})
 		end
 	end
 
@@ -91,7 +90,7 @@ class Game
 	end
 
 	def remaining_cards
-		@cards.select{|card| !card.dealt}
+		@card_decks.inject([]){|cards,deck| cards |= deck.cards.select{|card| !card.dealt}}
 	end
 
 	# TODO: somehow the deal method should be on the dealer, user
@@ -108,6 +107,7 @@ class Game
 
 	def deal player
 		puts "Dealt a card to " + player.name
+		puts 'cards remaining now - ' + remaining_cards.count.to_s
 		puts ''
 		player.add_card get_random_card
 	end
