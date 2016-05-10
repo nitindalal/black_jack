@@ -1,4 +1,4 @@
-class Game
+class GameLogic
 	include UtilityMethods
 
 	include ActiveModel::Model         

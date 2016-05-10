@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :card_decks
+  resources :games
   resources :card_sets
   resources :cards
   resources :users
