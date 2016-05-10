@@ -2,12 +2,11 @@ class CardDeckLogic
 	include ActiveModel::Model         
   include ActiveModel::Associations  
 
-	attr_accessor :cards, :deck_number
+	attr_accessor :cards
 
 	has_many :cards
 
-	def initialize deck_number
-		@deck_number = deck_number
+	def initialize
 		@logger = Logger.new(STDOUT)
 		@cards ||= []
 		Card.suits.keys.each do |suit|
