@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
 
 	has_many :cards
 
+	has_many :games_as_dealer, foreign_key: "dealer_id", class_name: "Game"
+	has_many :games_as_player, foreign_key: "player_id", class_name: "Game"
+
 	as_enum :role, dealer: 1, player: 2
 
 	def add_card card

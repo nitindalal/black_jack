@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507191622) do
+ActiveRecord::Schema.define(version: 20160510204139) do
+
+  create_table "card_decks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "card_decks_games", id: false, force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "card_deck_id"
+  end
+
+  add_index "card_decks_games", ["card_deck_id"], name: "index_card_decks_games_on_card_deck_id"
+  add_index "card_decks_games", ["game_id"], name: "index_card_decks_games_on_game_id"
 
   create_table "cards", force: :cascade do |t|
     t.integer  "suit_cd"
@@ -20,6 +33,13 @@ ActiveRecord::Schema.define(version: 20160507191622) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "user_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "dealer_id"
+    t.integer  "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

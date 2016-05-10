@@ -1,14 +1,17 @@
-class Game
+class Game < ActiveRecord::Base
+
 	include UtilityMethods
 
-	include ActiveModel::Model         
-  include ActiveModel::Associations 
+	belongs_to :dealer, :class_name => 'User'
+	belongs_to :player, :class_name => 'User'
 
-	attr_accessor :dealer, :player
+	has_and_belongs_to_many :card_decks
 
-	has_many :card_decks
+	attr_accessor :dealer, :player, :card_decks
 
-	def initialize(card_decks=6)
+	after_initialize :initialize_components
+
+	def initialize_components(card_decks=6)
 		initialize_new_card_decks card_decks
 		initialize_players
 		@infinity = (1.0/0.0)
@@ -32,14 +35,14 @@ class Game
 	# initialize system and player
 	def initialize_players
 		@dealer = create_new_player 'System', User.roles[:dealer]
-		@player = create_new_player
+		@player = create_new_player 'Player1'
 	end
 	
 	# initialize the card decks for game. 
 	def initialize_new_card_decks(decks)
 		@card_decks ||= []
 		for deck in 1..decks
-			@card_decks << CardDeck.new({:deck_number => deck})
+			@card_decks << CardDeck.new
 		end
 	end
 
@@ -110,4 +113,5 @@ class Game
 		@logger.debug 'remaining cards are ' + remaining_cards.count.to_s
 		@logger.info ''
 	end
+
 end
