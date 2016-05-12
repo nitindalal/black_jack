@@ -59,4 +59,6 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  post 'games/hit' => 'games#player_hit'
+  post 'games/stand' => 'games#player_stand'
 end

@@ -16,6 +16,7 @@ class GamesController < ApplicationController
   def new
     @game = Game.new
     @game.play
+    @game.save
     @game_json = @game.as_json(:include => { :card_decks => {
                             :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
                              :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } },
@@ -64,6 +65,10 @@ class GamesController < ApplicationController
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def player_hit
+    debugger
   end
 
   private
