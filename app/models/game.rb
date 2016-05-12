@@ -25,11 +25,11 @@ class Game < ActiveRecord::Base
 		print_player_details self
 
 		# hit the player and let the fun begin
-		winner = hit
+		#winner = hit
 
 		# print player score when the game ends
-		print_player_details self
-		@logger.info winner.name + " has won the game with " + winner.score.to_s + ' points'
+		# print_player_details self
+		# @logger.info winner.name + " has won the game with " + winner.score.to_s + ' points'
 	end
 
 	# initialize system and player
