@@ -19,3 +19,4 @@
 //= require backbone_datalink
 //= require backbone/black_jack
 //= require_tree .
+//= require bootstrap.min

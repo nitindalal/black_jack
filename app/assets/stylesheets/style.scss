@@ -1,0 +1,20 @@
+body{ color: #CC0033; background: #339900; }
+span{ display: block; }
+ 
+.outline{ width: 110px; border: 0px solid black; text-align: center; padding: 10px; margin: 10px; background: #FFF }
+.top{ text-align: left; }
+.bottom{ text-align: right; }
+ 
+.shadow{ box-shadow: 1px 1px 3px #000; -moz-box-shadow: 1px 1px 3px #000; -webkit-box-shadow: 1px 1px 3px #000; }
+.rounded{ border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px; }
+
+.outer_row{
+	height: 500px;
+}
+
+.player_row{
+	height: 200px;
+}
+.buttons_row{
+	height: 100px;
+}
