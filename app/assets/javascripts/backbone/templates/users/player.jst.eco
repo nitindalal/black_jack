@@ -1,0 +1,3 @@
+<div>
+<%= @name %> info here from view
+</div>
