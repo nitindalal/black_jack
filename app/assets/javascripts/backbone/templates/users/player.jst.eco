@@ -1,6 +1,6 @@
-<div class='row player_row dev-player-info'>
+<div class='row player_row dev-player-info' >
 <%= @name %> info here from view
-	<div class= 'row dev-player-cards'>
+	<div class='row dev-player-cards' data-user='<%= @name %>'>
 		card list from view
 	</div>
 </div>

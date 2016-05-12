@@ -3,8 +3,6 @@ BlackJack.Views.Users ||= {}
 class BlackJack.Views.Users.PlayerView extends Backbone.View
 	template: JST["backbone/templates/users/player"]
 
-	el:'.dev-player-info'
-
 	initialize: () ->	
 		@card_list_view = new BlackJack.Views.Cards.CardListView
 			cards: @model.get('cards')
@@ -12,5 +10,5 @@ class BlackJack.Views.Users.PlayerView extends Backbone.View
 
 	render: ->
 		$('.dev-players').append (@template(name: @model.get('name')))
-		$('.dev-player-cards').html @card_list_view.render().el
+		$("*[data-user='" + @model.get('name') + "']").html @card_list_view.render().el
 		return this
