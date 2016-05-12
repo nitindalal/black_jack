@@ -16,6 +16,10 @@ class GamesController < ApplicationController
   def new
     @game = Game.new
     @game.play
+    @game_json = @game.as_json(:include => { :card_decks => {
+                            :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
+                             :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } },
+                             :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } }  })
   end
 
   # GET /games/1/edit

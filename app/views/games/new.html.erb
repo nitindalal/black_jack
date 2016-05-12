@@ -2,12 +2,7 @@
 
 <div class='container game-outer'>
 	<div class='row outer_row'>
-		<div class='col-md-3'>
-			<div class='row card_decks dev-card-decks'>
-				display card decks here
-			</div>
-		</div>
-		<div class='col-md-9'>
+		<div class='col-md-12'>
 			<div class='row player_row dev-dealer-cards'>
 				dealer info here
 			</div>
@@ -35,7 +30,10 @@
 <script type="text/javascript">
   $(function() {
     // Blog is the app name
-    window.router = new BlackJack.Routers.GamesRouter({posts: 'text'});
+    window.router = new BlackJack.Routers.GamesRouter({
+    	game: <%= @game_json.to_json.html_safe -%>,
+    	card_decks: <%= @card_decks.to_json.html_safe -%>
+    });
     Backbone.history.start();
   });
 </script>
