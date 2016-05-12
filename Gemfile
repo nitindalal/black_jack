@@ -27,6 +27,8 @@ gem 'simple_enum', '~> 2.0.0'
 gem 'activemodel-associations'
 gem 'activemodel'
 gem "rails-backbone"
+gem 'coffee-script-source', '1.8.0'
+gem 'eco', '~> 1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
