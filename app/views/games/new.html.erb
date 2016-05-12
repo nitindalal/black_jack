@@ -6,26 +6,17 @@
 			<div class= 'row player-rows dev-players'>
 			</div>
 			<div class='row buttons_row dev-buttons'>
-				hit and deal buttons here
+				<div class='btn-group'>
+					<div class='btn btn-green'>Hit</div>
+					<div class='btn btn-blue'>Stand</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class='playing-cards'>
-	<div>
-		Hello BlackJack
-	</div>
-	<div class="dev-card"></div>
-</div>
-
-<div id='games'>Replace this</div>
-
-<%= link_to 'Back', games_path %>
-
 <script type="text/javascript">
   $(function() {
-    // Blog is the app name
     window.router = new BlackJack.Routers.GamesRouter({
     	game: <%= @game_json.to_json.html_safe -%>,
     	card_decks: <%= @card_decks.to_json.html_safe -%>
