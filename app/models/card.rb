@@ -4,9 +4,9 @@ class Card < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :card_deck
 
-	@@suit_symbols = {'spades' => '&spades;' ,'hearts' =>	'&hearts;', 'diamonds' =>	'&diams;',	'clubs' => '&clubs;'}
+	@@suit_symbols = {'spades' => '♠' ,'hearts' =>	'♥', 'diamonds' =>	'♦',	'clubs' => '♠'}
 
-	as_enum :denomination, ace: 11, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, jack: 10, queen: 10, king: 10
+	as_enum :denomination, 'A': 11, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'J': 10, 'Q': 10, 'K': 10
 	as_enum :suit, diamonds: 1, clubs: 2, hearts: 3, spades: 4
 
 	def mark_as_dealt
