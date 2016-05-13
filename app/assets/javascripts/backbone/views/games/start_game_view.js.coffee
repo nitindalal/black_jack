@@ -8,9 +8,13 @@ class BlackJack.Views.Games.StartGameView extends Backbone.View
 	events:
 		'click .dev-hit-button'   : 'fetch_game'
 		'click .dev-stand-button' : 'fetch_game'
+		'click .dev-reset-button'		: 'reload_page'
 
 	initialize: (options) ->
 		@game = options.game
+
+	reload_page: =>
+		window.location.reload()
 
 	fetch_game:(e) =>
 		method = $(e.currentTarget).data('method')
