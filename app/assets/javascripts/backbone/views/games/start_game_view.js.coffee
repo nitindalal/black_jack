@@ -20,17 +20,16 @@ class BlackJack.Views.Games.StartGameView extends Backbone.View
 			data:
 				id: @game.id
 			error: (jqXHR, textStatus, errorThrown) ->
-				$('body').append "AJAX Error: #{textStatus}"
 			success: (data, textStatus, jqXHR) =>
 				_this.game = data
 				_this.render()
-				$('body').append "Successful AJAX call: #{data}"
 
 	stand:() ->
 		console.log 'stand' 
 
 	render: ->
 		#@$el.html(@template())
+		$('.dev-players').html ''
 		dealer = new BlackJack.Models.User(@game.dealer)
 		dealer_view = new BlackJack.Views.Users.PlayerView
 			model: dealer

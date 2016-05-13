@@ -1,4 +1,4 @@
-<div class="outline shadow rounded">
+<div class="outline shadow rounded card">
 <div class="top"><span><%= @denomination %></span><span><%= @symbol %></span></div>
 <h1><%= @symbol %></h1>
 <div class="bottom"><span><%= @symbol %></span><span><%= @denomination %></span></div>
