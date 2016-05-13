@@ -58,4 +58,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  get 'new_game' => 'games#new_game'
+  post 'games/player_method' => 'games#player_method'
 end

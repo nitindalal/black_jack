@@ -1,0 +1,41 @@
+.outline{ width: 110px; border: 0px solid black; text-align: center; padding: 10px; margin: 10px; background: #FFF }
+.top{ text-align: left; }
+.bottom{ text-align: right; }
+ 
+.shadow{ box-shadow: 1px 1px 3px #000; -moz-box-shadow: 1px 1px 3px #000; -webkit-box-shadow: 1px 1px 3px #000; }
+.rounded{ border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px; }
+
+.outer_row{
+	height: 500px;
+	text-align: center;
+}
+
+.container{
+	color: #CC0033; background: #339900;
+	display: block;
+}
+
+.player_row{
+	height: 250px;
+}
+.buttons_row{
+	height: 70px;
+}
+.card{
+	float: left;
+}
+
+h1{
+	text-align: center;
+}
+.user-cards{
+	display: inline-block;
+}
+
+.btn-group{
+	width: 300px;
+}
+
+.btn{
+	width: 100px;
+}

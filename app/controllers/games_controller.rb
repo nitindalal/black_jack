@@ -15,6 +15,20 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
+    
+  end
+
+  def new_game
+    @dealer = User.create( { :name => 'System'})
+    @player = User.create( { :name => 'Player1'})
+    @game = Game.new({:player_id => @player.id, :dealer_id => @dealer.id})
+    @game.play
+    @game.hit
+    @game.save
+    @game_json = @game.as_json(:methods => :winner ,:include => { :card_decks => {
+                            :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
+                             :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } }, :methods => :score },
+                             :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } }, :methods => :score}  })
   end
 
   # GET /games/1/edit
@@ -58,6 +72,20 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def player_method
+    game = Game.find params[:id]
+    method = params[:method]
+    game.winner = game.send(method.to_sym)
+    # game.save
+    game_json = game.as_json(:methods => :winner ,:include => { :card_decks => {
+                            :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
+                             :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } }, :methods => :score },
+                             :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } }, :methods => :score}  })
+    respond_to do |format|
+      format.json { render json: game_json.to_json , status: 200 }
     end
   end
 

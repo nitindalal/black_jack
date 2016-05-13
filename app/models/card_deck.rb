@@ -5,6 +5,7 @@ class CardDeck < ActiveRecord::Base
 	attr_accessor :cards
 
 	has_many :cards
+	accepts_nested_attributes_for :cards
 
 	after_initialize :initialize_cards
 
@@ -12,7 +13,7 @@ class CardDeck < ActiveRecord::Base
 		@cards ||= []
 		Card.suits.keys.each do |suit|
 	    Card.denominations.keys.each do |denomination|
-	      @cards << Card.new( {:denomination_cd => Card.denominations[denomination], :suit_cd =>  Card.suits[suit]})
+	      @cards << Card.create( {:denomination_cd => Card.denominations[denomination], :suit_cd =>  Card.suits[suit]})
 	    end
 	  end
 	end
