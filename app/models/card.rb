@@ -13,6 +13,7 @@ class Card < ActiveRecord::Base
 
 	def mark_as_dealt
 		self.dealt = true
+		self.save
 	end
 
 	def symbol
