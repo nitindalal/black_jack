@@ -14,6 +14,7 @@ class BlackJack.Views.Games.StartGameView extends Backbone.View
 
 	fetch_game:(e) =>
 		method = $(e.currentTarget).data('method')
+		$('.dev-status').html 'Submitting....'
 		$.ajax
 			url: 'games/player_method'
 			type: 'POST'
@@ -23,6 +24,7 @@ class BlackJack.Views.Games.StartGameView extends Backbone.View
 				method: method
 			error: (jqXHR, textStatus, errorThrown) ->
 			success: (data, textStatus, jqXHR) =>
+				$('.dev-status').html ''
 				_this.game = data
 				_this.render()
 

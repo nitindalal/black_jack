@@ -23,6 +23,7 @@ class GamesController < ApplicationController
     @player = User.create( { :name => 'Player1'})
     @game = Game.new({:player_id => @player.id, :dealer_id => @dealer.id})
     @game.play
+    @game.hit
     @game.save
     @game_json = @game.as_json(:methods => :winner ,:include => { :card_decks => {
                             :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
