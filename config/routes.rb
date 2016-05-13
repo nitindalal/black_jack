@@ -60,6 +60,5 @@ Rails.application.routes.draw do
   #   end
 
   get 'new_game' => 'games#new_game'
-  post 'games/hit' => 'games#player_hit'
-  post 'games/stand' => 'games#player_stand'
+  post 'games/player_method' => 'games#player_method'
 end

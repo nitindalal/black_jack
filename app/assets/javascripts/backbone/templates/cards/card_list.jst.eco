@@ -1,5 +1,4 @@
 <div class= 'row'>
-	<h2>Card list template</h2>
 	<div class='user-cards dev-user-cards'>
 	</div>
 </div>

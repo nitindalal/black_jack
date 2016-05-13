@@ -6,26 +6,25 @@ class BlackJack.Views.Games.StartGameView extends Backbone.View
 	el: '.game-outer'
 
 	events:
-		'click .dev-hit-button'   : 'hit'
-		'click .dev-stand-button' : 'stand'
+		'click .dev-hit-button'   : 'fetch_game'
+		'click .dev-stand-button' : 'fetch_game'
 
 	initialize: (options) ->
 		@game = options.game
 
-	hit:() =>
+	fetch_game:(e) =>
+		method = $(e.currentTarget).data('method')
 		$.ajax
-			url: 'games/hit'
+			url: 'games/player_method'
 			type: 'POST'
 			dataType: 'JSON'
 			data:
 				id: @game.id
+				method: method
 			error: (jqXHR, textStatus, errorThrown) ->
 			success: (data, textStatus, jqXHR) =>
 				_this.game = data
 				_this.render()
-
-	stand:() ->
-		console.log 'stand' 
 
 	render: ->
 		#@$el.html(@template())
@@ -38,4 +37,5 @@ class BlackJack.Views.Games.StartGameView extends Backbone.View
 			model: player
 		dealer_view.render()
 		player_view.render()
+		alert @game.winner.name + " has won the game!!" if @game.winner != null
 		return this

@@ -74,9 +74,10 @@ class GamesController < ApplicationController
     end
   end
 
-  def player_hit
+  def player_method
     game = Game.find params[:id]
-    game.winner = game.hit
+    method = params[:method]
+    game.winner = game.send(method.to_sym)
     game.save
     game_json = game.as_json(:methods => :winner ,:include => { :card_decks => {
                             :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
