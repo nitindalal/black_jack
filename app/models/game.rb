@@ -17,29 +17,10 @@ class Game < ActiveRecord::Base
 
 	def initialize_components(card_decks=6)
 		initialize_new_card_decks card_decks
-		#initialize_players
 		@infinity = (1.0/0.0)
+		deal_first_cards
 		@logger = Logger.new(STDOUT)
 		@logger.level = 1
-	end
-
-	# call this method to start the game after initializing
-	def play
-		deal_first_cards
-		print_player_details self
-
-		# hit the player and let the fun begin
-		#winner = hit
-
-		# print player score when the game ends
-		# print_player_details self
-		# @logger.info winner.name + " has won the game with " + winner.score.to_s + ' points'
-	end
-
-	# initialize system and player
-	def initialize_players
-		self.dealer = create_new_player 'System', User.roles[:dealer]
-		self.player = create_new_player 'Player1'
 	end
 	
 	# initialize the card decks for game. 
@@ -87,7 +68,6 @@ class Game < ActiveRecord::Base
 		when 21..@infinity
 			return self.player
 		when 1..16
-			print_player_details self
 			stand
 		when 17..20
 			# TODO ask what happens when they are equal. For now player wins in case of equal
@@ -107,9 +87,6 @@ class Game < ActiveRecord::Base
 	def deal player
 		player.add_card get_random_card
 		player.save
-		@logger.info "Dealt a card to " + player.name
-		@logger.debug 'remaining cards are ' + remaining_cards.count.to_s
-		@logger.info ''
 	end
 
 end
