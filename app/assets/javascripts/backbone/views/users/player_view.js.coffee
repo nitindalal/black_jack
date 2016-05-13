@@ -9,6 +9,6 @@ class BlackJack.Views.Users.PlayerView extends Backbone.View
 		@card_list_view.render()
 
 	render: ->
-		$('.dev-players').append (@template(name: @model.get('name')))
+		$('.dev-players').append @template(name: @model.get('name'), score: @model.get('score') )
 		$("*[data-user='" + @model.get('name') + "']").html @card_list_view.render().el
 		return this

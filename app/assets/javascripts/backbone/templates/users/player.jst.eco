@@ -1,5 +1,5 @@
 <div class='row player_row dev-player-info' >
-<%= @name %> info here from view
+<%= @name %> has a score of <%= @score %>
 	<div class='row dev-player-cards' data-user='<%= @name %>'>
 		card list from view
 	</div>

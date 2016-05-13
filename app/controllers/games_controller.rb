@@ -26,8 +26,8 @@ class GamesController < ApplicationController
     @game.save
     @game_json = @game.as_json(:methods => :winner ,:include => { :card_decks => {
                             :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
-                             :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } },
-                             :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } }  })
+                             :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } }, :methods => :score },
+                             :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } }, :methods => :score}  })
   end
 
   # GET /games/1/edit
@@ -81,8 +81,8 @@ class GamesController < ApplicationController
     game.save
     game_json = game.as_json(:methods => :winner ,:include => { :card_decks => {
                             :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
-                             :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } },
-                             :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } }  })
+                             :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } }, :methods => :score },
+                             :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } }, :methods => :score}  })
     respond_to do |format|
       format.json { render json: game_json.to_json , status: 200 }
     end
