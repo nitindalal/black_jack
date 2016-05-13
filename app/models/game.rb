@@ -91,7 +91,7 @@ class Game < ActiveRecord::Base
 			stand
 		when 17..20
 			# TODO ask what happens when they are equal. For now player wins in case of equal
-			return (self.player.score >= self.dealer.score ? self.player : self.dealer)
+			return (self.player.score > self.dealer.score ? self.player : self.dealer)
 		end
 	end
 
