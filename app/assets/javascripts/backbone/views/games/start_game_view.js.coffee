@@ -10,7 +10,28 @@ class BlackJack.Views.Games.StartGameView extends Backbone.View
 		'click .dev-stand-button' : 'stand'
 
 	initialize: (options) ->
-		@game = options.game	
+		@game = options.game
+
+	hit:() ->
+		$.ajax
+			url: 'games/hit'
+			type: 'POST'
+			dataType: 'JSON'
+			data:
+				id: @game.id
+		error: (jqXHR, textStatus, errorThrown) ->
+			$('body').append "AJAX Error: #{textStatus}"
+		success: (data, textStatus, jqXHR) ->
+			debugger
+			@game = data.game
+			@render()
+			$('body').append "Successful AJAX call: #{data}"
+
+	stand:() ->
+		console.log 'stand' 
+
+	render: ->
+		#@$el.html(@template())
 		dealer = new BlackJack.Models.User(@game.dealer)
 		dealer_view = new BlackJack.Views.Users.PlayerView
 			model: dealer
@@ -19,24 +40,4 @@ class BlackJack.Views.Games.StartGameView extends Backbone.View
 			model: player
 		dealer_view.render()
 		player_view.render()
-
-	hit:() ->
-		$.ajax
-			url: 'hit'
-			type: 'POST'
-			dataType: 'JSON'
-			data:
-				id: @game.id
-		error: (jqXHR, textStatus, errorThrown) ->
-			debugger
-			$('body').append "AJAX Error: #{textStatus}"
-		success: (data, textStatus, jqXHR) ->
-			debugger
-			$('body').append "Successful AJAX call: #{data}"
-
-	stand:() ->
-		console.log 'stand' 
-
-	render: ->
-		#@$el.html(@template())
 		return this

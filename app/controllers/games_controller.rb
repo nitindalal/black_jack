@@ -15,9 +15,16 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
+    
+  end
+
+  def new_game
+    @dealer = User.create( { :name => 'System'})
+    @player = User.create( { :name => 'Player1'})
+    @game = Game.new({:player_id => @player.id, :dealer_id => @dealer.id})
     @game.play
     @game.save
-    @game_json = @game.as_json(:include => { :card_decks => {
+    @game_json = @game.as_json(:methods => :winner ,:include => { :card_decks => {
                             :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
                              :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } },
                              :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } }  })
@@ -69,6 +76,14 @@ class GamesController < ApplicationController
 
   def player_hit
     debugger
+    game = Game.find params[:id]
+    game.winner = game.hit
+    game.save
+    game_json = game.as_json(:methods => :winner ,:include => { :card_decks => {
+                            :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
+                             :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } },
+                             :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } }  })
+    format.json { render json: @game.to_json , status: 200 }
   end
 
   private
