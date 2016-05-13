@@ -75,7 +75,6 @@ class GamesController < ApplicationController
   end
 
   def player_hit
-    debugger
     game = Game.find params[:id]
     game.winner = game.hit
     game.save
@@ -83,7 +82,9 @@ class GamesController < ApplicationController
                             :include => { :cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } },
                              :only => :title }, :dealer => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } },
                              :player => { :include => {:cards => { :methods => [:suit, :denomination, :suit_cd, :denomination_cd, :symbol], :only => :body } } }  })
-    format.json { render json: @game.to_json , status: 200 }
+    respond_to do |format|
+      format.json { render json: game_json.to_json , status: 200 }
+    end
   end
 
   private

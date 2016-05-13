@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
 	as_enum :role, dealer: 1, player: 2
 
+	accepts_nested_attributes_for :cards
+
 	def add_card card
 		self.cards << card
 	end

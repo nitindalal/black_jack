@@ -106,6 +106,7 @@ class Game < ActiveRecord::Base
 
 	def deal player
 		player.add_card get_random_card
+		player.save
 		@logger.info "Dealt a card to " + player.name
 		@logger.debug 'remaining cards are ' + remaining_cards.count.to_s
 		@logger.info ''

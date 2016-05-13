@@ -12,20 +12,19 @@ class BlackJack.Views.Games.StartGameView extends Backbone.View
 	initialize: (options) ->
 		@game = options.game
 
-	hit:() ->
+	hit:() =>
 		$.ajax
 			url: 'games/hit'
 			type: 'POST'
 			dataType: 'JSON'
 			data:
 				id: @game.id
-		error: (jqXHR, textStatus, errorThrown) ->
-			$('body').append "AJAX Error: #{textStatus}"
-		success: (data, textStatus, jqXHR) ->
-			debugger
-			@game = data.game
-			@render()
-			$('body').append "Successful AJAX call: #{data}"
+			error: (jqXHR, textStatus, errorThrown) ->
+				$('body').append "AJAX Error: #{textStatus}"
+			success: (data, textStatus, jqXHR) =>
+				_this.game = data
+				_this.render()
+				$('body').append "Successful AJAX call: #{data}"
 
 	stand:() ->
 		console.log 'stand' 

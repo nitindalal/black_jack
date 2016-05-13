@@ -1,8 +1,10 @@
 class Card < ActiveRecord::Base
-	attr_accessor :card_set, :denomination_cd, :suit_cd, :dealt
+	attr_accessor :dealt
 
 	belongs_to :user
 	belongs_to :card_deck
+
+	attr_accessible :suit_cd, :denomination_cd, :dealt
 
 	@@suit_symbols = {'spades' => '♠' ,'hearts' =>	'♥', 'diamonds' =>	'♦',	'clubs' => '♠'}
 
